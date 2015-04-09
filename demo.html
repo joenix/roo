@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+<head>
+<title>Roo</title>
+<meta charset="utf-8">
+</head>
+<body>
+
+<style>
+progress, span
+{
+	width: 50%;
+	text-align: center;
+	display: block;
+	margin: 0 auto;
+}
+div{
+	padding-top: 100px;
+}
+</style>
+
+<div>
+	<span>0%</span>
+	<progress max="100"></progress>
+</div>
+
+<script src="roo.js"></script>
+<script type="text/javascript">
+
+var
+
+resource = ['picture.png', 'stylesheet.css', 'database.json'],
+
+library = ['jquery.uncompressed.js', 'action.js'],
+
+denominator = resource.length;
+
+
+// Config Setting
+roo.config = {
+
+	base: location.protocol + '//' + location.host + '/resource/' // http://localhost/
+
+};
+
+// Use Javascript Library
+roo.use( library, function( $, action ){
+
+	// Preload Resource
+	roo.preload( resource, function( item, index ){
+
+		var
+
+		process = Math.floor( (index + 1) / denominator * 100 ),
+
+		progress = jQuery('progress'),
+
+		percent = jQuery('span');
+
+
+		progress.animate(
+			
+			{ value: process },
+
+			function(){
+
+				percent.text( process + '%' );
+
+				if( process === 100 ){
+
+					alert( action.getDay( 3 ) );
+
+				}
+
+			});
+
+	});
+
+});
+
+</script>
+</body>
+</html>
