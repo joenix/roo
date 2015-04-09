@@ -35,10 +35,10 @@ function( window, undefined ){
 	location = w.location,
 
 	// Store Cache
-	store = [];
+	store = [],
 
 	// Roo
-	w.r = {
+	r = {
 
 		// Version
 		version: '1.0.2015.0409',
@@ -353,7 +353,7 @@ function( window, undefined ){
 
 		}
 
-	},
+	};
 
 	// Define
 	w.define = function( callback ){
@@ -370,6 +370,6 @@ function( window, undefined ){
 
 	};
 
-	return w.roo = w.r;
+	return w.roo = w.r = r;
 
 });
