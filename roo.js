@@ -269,6 +269,9 @@ function( window, undefined ){
 
 			callback = callback || noop;
 
+			// Clear Store
+			store = [];
+
 			return function( index ){
 
 				switch( resource.constructor ){
