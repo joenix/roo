@@ -1,4 +1,6 @@
-define(function(){
+define(function($){
+
+console.log( $ );
 
 return {
 	// 0

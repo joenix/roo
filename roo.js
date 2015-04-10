@@ -267,6 +267,8 @@ function( window, undefined ){
 		// Preload
 		preload: function( resource, callback ){
 
+			callback = callback || noop;
+
 			return function( index ){
 
 				switch( resource.constructor ){
@@ -305,6 +307,8 @@ function( window, undefined ){
 
 		// Use Javascript Library
 		use: function( library, holder, callback ){
+
+			library = library || [], holder = holder || '', callback = callback || noop;
 
 			switch( holder.constructor ){
 
@@ -358,7 +362,7 @@ function( window, undefined ){
 	// Define
 	w.define = function( callback ){
 
-		store.push( callback.constructor === Function ? callback() : callback );
+		store.push( callback.constructor === Function ? callback.apply(this, store) : callback );
 
 	};
 
