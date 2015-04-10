@@ -51,7 +51,7 @@ function( window, undefined ){
 				// Console Object
 				function( info, i ){
 
-					if( info.constructor !== String ){
+					if( obj.constructor !== String ){
 
 						for( i in obj ){
 
