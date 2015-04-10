@@ -21,7 +21,10 @@ roo.use( ['jQuery.js', 'action.js'], function( $, act ){
 
 ```
 // action.js
-define(function(){
+define(function($){
+
+	console.log($);
+
 	return {
 		plus: function( a, b ){
 			return a + b;
