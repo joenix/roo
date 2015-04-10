@@ -179,6 +179,27 @@ function( window, undefined ){
 
 		},
 
+		// Tolerance AMD
+		tolerance: function( store ){
+
+			r.each( store, function( index, item ){
+
+				switch( item ){
+
+					case 'jquery':
+
+						store[ index ] = w['jQuery'];
+
+						break;
+
+				}
+
+			});
+
+			return store;
+
+		},
+
 		// Read Resource
 		read: function( url, callback ){
 
@@ -337,22 +358,7 @@ function( window, undefined ){
 
 				if( !library.length ){
 
-					// Fault Tolerance
-					r.each( store, function( index, item ){
-
-						switch( item ){
-
-							case 'jquery':
-
-								store[ index ] = w['jQuery'];
-
-								break;
-
-						}
-
-					});
-
-					callback.apply(this, store);
+					callback.apply( this, r.tolerance( store ) );
 
 				}
 
@@ -365,7 +371,7 @@ function( window, undefined ){
 	// Define
 	w.define = function( callback ){
 
-		store.push( callback.constructor === Function ? callback.apply(this, store) : callback );
+		store.push( callback.constructor === Function ? callback.apply( this, r.tolerance( store ) ) : callback );
 
 	};
 
