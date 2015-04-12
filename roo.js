@@ -51,18 +51,18 @@ function( window, undefined ){
 				// Console Object
 				function( info, i ){
 
-					if( obj.constructor !== String ){
+					if( r.detect( obj, String ) ){
+
+						info = obj;
+
+					}
+					else{
 
 						for( i in obj ){
 
 							info += i + ': ' + obj[i] + '\n';
 
 						}
-
-					}
-					else{
-
-						info = obj;
 
 					}
 
@@ -109,7 +109,7 @@ function( window, undefined ){
 
 			return function( len, i, rate ){
 
-				rate = type ? ( type.constructor === Number ? type : 2 ) : 1;
+				rate = type ? ( r.detect( type, Number ) ? type : 2 ) : 1;
 
 				if( len ){
 
@@ -164,6 +164,26 @@ function( window, undefined ){
 
 		},
 
+		// Detect Type
+		detect: function( obj, type ){
+
+			return type ? obj.constructor === type :
+
+				function( class2type, obj )
+				{
+					return w
+					[
+						/[A-Z]\w+/
+							.exec(
+								class2type.call(obj)
+							)
+							.toString()
+					]
+				}
+				( {}.toString, obj );
+
+		},
+
 		// Recursive Array
 		recursive: function( arr, callback ){
 
@@ -197,6 +217,13 @@ function( window, undefined ){
 			});
 
 			return store;
+
+		},
+
+		// Support
+		support: function( fn, argument ){
+
+			return fn.apply( this, r.tolerance( argument ) );
 
 		},
 
@@ -295,7 +322,7 @@ function( window, undefined ){
 
 			return function( index ){
 
-				switch( resource.constructor ){
+				switch( r.detect( resource ) ){
 
 					case String:
 
@@ -334,31 +361,26 @@ function( window, undefined ){
 
 			library = library || [], holder = holder || '', callback = callback || noop;
 
-			switch( holder.constructor ){
+			// Quick Running
+			if( r.detect( library, Function ) ){
 
-				case Function:
-
-					callback = holder, holder = undefined;
-
-					break;
-
-				case String:
-
-					break;
-
-				case Array:
-
-					break;
-
-				default:;
+				return callback();
 
 			}
 
+			// Library + Callback
+			if( r.detect( holder, Function ) ){
+
+				callback = holder, holder = undefined;
+
+			}
+
+			// Preload Support
 			r.preload( library, function( item, index ){
 
 				if( !library.length ){
 
-					callback.apply( this, r.tolerance( store ) );
+					r.support( callback, store );
 
 				}
 
@@ -371,7 +393,7 @@ function( window, undefined ){
 	// Define
 	w.define = function( callback ){
 
-		store.push( callback.constructor === Function ? callback.apply( this, r.tolerance( store ) ) : callback );
+		store.push( r.detect( callback, Function ) ? r.support( callback, store ) : callback );
 
 	};
 

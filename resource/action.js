@@ -1,6 +1,6 @@
 define(function($){
 
-console.log( $ );
+console.log( $, '~ in action.js' );
 
 return {
 	// 0
