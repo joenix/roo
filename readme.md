@@ -19,8 +19,17 @@ roo.use( ['jQuery.js', 'action.js'], function( $, act ){
 });
 ```
 
+or
+
 ```
-// action.js
+roo.use( ['jQuery.js', 'action.js'], ['$', act], function(){
+	console.log( $, act.plus( 45, 54 ) );
+});
+```
+
+in action.js
+
+```
 define(function($){
 
 	console.log($);
