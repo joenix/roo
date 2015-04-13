@@ -175,7 +175,7 @@ function( window, undefined ){
 					[
 						/[A-Z]\w+/
 							.exec(
-								class2type.call(obj)
+								class2type.call( obj )
 							)
 							.toString()
 					]
@@ -380,6 +380,36 @@ function( window, undefined ){
 
 				if( !library.length ){
 
+					// Holder Global Use
+					switch( r.detect( holder ) ){
+
+						case Array:
+
+							r.each( store, function( index, hand ){
+
+								return function( hold ){
+
+									if( hold ){
+
+										w[ hold ] = hand;
+
+									}
+
+								}( holder[ index ] );
+
+							});
+
+							break;
+
+						case String:
+
+							w[ holder ] = store[0];
+
+							break;
+
+					}
+
+					// Run Support
 					r.support( callback, store );
 
 				}
