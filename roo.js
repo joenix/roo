@@ -89,6 +89,9 @@ function( window, undefined ){
 
 				};
 
+				// Finally
+				console.log('Debug Console Is Open !!');
+
 		},
 
 		// Manifest
