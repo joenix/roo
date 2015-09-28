@@ -49,3 +49,7 @@ roo.preload( ['picture.jpg', 'stylesheet.css', 'database.json'], function( item,
 	console.log( index );
 });
 ```
+
+## Copyright and license
+
+Code and documentation copyright 2015-2018 Joenix.com. Code released under [the MIT license](https://github.com/joenix/roo/blob/master/LICENSE).
