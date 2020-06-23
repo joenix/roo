@@ -3,7 +3,7 @@
 	'use strict';
 
 	// Environment Detect
-	global.document ? factory( global || this ) : console.log('Roo must run in Document !');
+	global.document ? factory( global || this ) : console.log('roo.js must run in document.');
 
 })
 (
@@ -106,6 +106,13 @@ function( window, undefined ){
 
 		}
 		( this.config || {} ),
+
+		// Url
+		link: function(uri) {
+
+			return /^http/.test(uri) ? uri : r.config.base + uri;
+
+		},
 
 		// Each List
 		each: function( arr, callback, type ){
@@ -329,7 +336,7 @@ function( window, undefined ){
 
 					case String:
 
-						r.read( r.config.base + resource, function( item ){
+						r.read( r.link(resource), function( item ){
 
 							callback( item, index );
 
@@ -342,7 +349,7 @@ function( window, undefined ){
 						// Recursive Resource
 						r.recursive( resource, function( url, recursive ){
 
-							r.read( r.config.base + url, function( item ){
+							r.read( r.link(url), function( item ){
 
 								callback( item, index ), index++, recursive();
 
